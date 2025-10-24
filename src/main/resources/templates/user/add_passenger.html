@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Passenger</title>
+</head>
+<body>
+    <h2>Add Passenger</h2>
+	
+
+    <form th:action="@{/user/addPassenger}" th:object="${passenger}" method="post">
+		<input type="hidden" name="username" th:value="${username}" />
+		
+        <label>Name:</label>
+        <input type="text" th:field="*{name}" required /><br><br>
+
+        <label>Age:</label>
+        <input type="number" th:field="*{age}" required /><br><br>
+
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" required /><br><br>
+
+        <label>Phone:</label>
+        <input type="text" th:field="*{phone}" required /><br><br>
+
+        <button type="submit">Save Passenger</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Your Reservations</title>
+</head>
+<body>
+    <h2>Your Reservations</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Passenger Name</th>
+                <th>Bus Number</th>
+                <th>Route</th>
+                <th>Seat Count</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="reservation : ${reservations}">
+                <td th:text="${reservation.passengerName}"></td>
+                <td th:text="${reservation.bus.busNumber}"></td>
+                <td th:text="${reservation.bus.source} + ' → ' + ${reservation.bus.destination}"></td>
+                <td th:text="${reservation.seatCount}"></td>
+                <td th:text="${#dates.format(reservation.reservationDate, 'dd-MM-yyyy HH:mm')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+</body>
+</html>

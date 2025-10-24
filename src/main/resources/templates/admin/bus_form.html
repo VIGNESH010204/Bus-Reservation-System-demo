@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Bus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 300px;
+            padding: 5px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+    <a href="/admin/busForm">Add Bus</a> |
+    <a href="/admin/offers">Offers</a> |
+    <a href="/admin/reservations">Reservations</a>
+    </nav>
+    
+    <h2>Add New Bus</h2>
+    <form th:action="@{/addBus}" th:object="${bus}" method="post">
+        <label>Bus Number:</label>
+        <input type="text" th:field="*{busNumber}" placeholder="e.g. TN01AB1234" />
+
+        <label>Route:</label>
+        <input type="text" th:field="*{route}" placeholder="e.g. Chennai to Coimbatore" />
+
+        <label>Source:</label>
+        <input type="text" th:field="*{source}" placeholder="e.g. Chennai" />
+
+        <label>Destination:</label>
+        <input type="text" th:field="*{destination}" placeholder="e.g. Coimbatore" />
+
+        <label>Departure Time:</label>
+        <input type="datetime-local" th:field="*{departureTime}" />
+
+        <label>Total Seats:</label>
+        <input type="number" th:field="*{totalSeats}" placeholder="e.g. 40" />
+
+        <label>Available Seats:</label>
+        <input type="number" th:field="*{availableSeats}" placeholder="e.g. 40" />
+
+        <label>Fare:</label>
+        <input type="number" step="0.01" th:field="*{fare}" placeholder="e.g. 499.00" />
+
+        <button type="submit">Add Bus</button>
+    </form>
+</body>
+</html>

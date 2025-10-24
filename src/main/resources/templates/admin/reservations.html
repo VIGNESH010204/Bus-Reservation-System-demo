@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - All Reservations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        h2 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .no-data {
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h2>All Reservations</h2>
+
+    <div th:if="${#lists.isEmpty(reservations)}">
+        <p class="no-data">No reservations found.</p>
+    </div>
+
+    <table th:if="${!#lists.isEmpty(reservations)}">
+        <thead>
+            <tr>
+                <th>Passenger Name</th>
+                <th>Bus Number</th>
+                <th>Route</th>
+                <th>Departure</th>
+                <th>Seats Reserved</th>
+                <th>Reservation Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="res : ${reservations}">
+                <td th:text="${res.passengerName}"></td>
+                <td th:text="${res.bus.busNumber}"></td>
+                <td th:text="${res.bus.route}"></td>
+                <td th:text="${#temporals.format(res.bus.departureTime, 'dd-MM-yyyy HH:mm')}"></td>
+                <td th:text="${res.seatCount}"></td>
+                <td th:text="${#temporals.format(res.reservationDate, 'dd-MM-yyyy HH:mm')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

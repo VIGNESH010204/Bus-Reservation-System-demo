@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reserve Ticket</title>
+</head>
+<body>
+    <h2>Reserve Your Ticket</h2>
+
+    <!-- Debug: Show if passengers are missing -->
+    <p th:if="${#lists.isEmpty(passengers)}" style="color:red;">No passengers found. Please register one first.</p>
+
+    <form th:action="@{/user/reserve}" method="post">
+        <!-- Select Bus -->
+        <label for="busId">Select Bus:</label>
+        <select name="busId" id="busId" required>
+            <option value="" disabled selected>Select a bus</option>
+            <option th:each="bus : ${buses}" 
+                    th:value="${bus.busId}" 
+                    th:text="${bus.busNumber + ' - ' + bus.source + ' to ' + bus.destination}">
+            </option>
+        </select>
+        <br><br>
+
+        <!-- Select Passenger -->
+        <label for="passengerId">Select Passenger:</label>
+        <select name="passengerId" id="passengerId" required>
+            <option value="" disabled selected>Select a passenger</option>
+            <option th:each="passenger : ${passengers}" 
+                    th:value="${passenger.passengerId}" 
+                    th:text="${passenger.name + ' (' + passenger.email + ')'}">
+            </option>
+        </select>
+        <br><br>
+
+        <!-- Seat Count -->
+        <label for="seatCount">Number of Seats:</label>
+        <input type="number" name="seatCount" id="seatCount" min="1" required />
+        <br><br>
+
+        <!-- Submit -->
+        <button type="submit">Reserve</button>
+    </form>
+</body>
+</html>
